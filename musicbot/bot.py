@@ -1062,6 +1062,9 @@ class MusicBot(discord.Client):
         argcheck()
 
         try:
+            # Fix apostraphes and quotation marks
+            for i in range(len(leftover_args)):
+                leftover_args[i] = leftover_args[i].replace('\'', '\\\'').replace('\"', '\\\"')
             leftover_args = shlex.split(' '.join(leftover_args))
         except ValueError:
             raise exceptions.CommandError("Please quote your search query properly.", expire_in=30)
